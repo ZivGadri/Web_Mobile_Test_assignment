@@ -16,7 +16,7 @@ import java.util.HashMap;
 import static mobile.manager.server.AppiumServerManager.*;
 
 public class AndroidDriverManager {
-    private static final String APP_PATH = String.valueOf(Path.of(System.getProperty("user.dir"), "src/main/resources", "yummly-8-6.apk"));
+    private static final String APP_PATH = String.valueOf(Path.of(System.getProperty("user.dir"), "src/main/resources", "yummly-8-7.apk"));
     private static final ThreadLocal<AndroidDriver> DRIVER = new ThreadLocal<>();
     private static final Logger LOG = LogManager.getLogger(AndroidDriverManager.class);
 
