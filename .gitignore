@@ -35,3 +35,5 @@ maven-assembly-plugin/
 !pom.xml
 *.lst
 pom.properties
+src/main/resources/app/*.apk
+target/classes/app/*.apk
