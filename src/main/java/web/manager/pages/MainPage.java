@@ -1,21 +1,18 @@
 package web.manager.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import web.manager.PageObject;
+import web.manager.pageHelpers.MainPageHelper;
 
 public class MainPage extends PageObject {
-
-    @FindBy(id = "login-form-username")
-    private WebElement usernameField;
-
-    @FindBy(id = "login-form-password")
-    private WebElement passwordField;
-
-    @FindBy(id = "login")
-    private WebElement loginBtn;
+    private static final Logger logger = LogManager.getLogger(MainPage.class);
+    @FindBy(xpath = "//button[contains(@class,'acceptDefaultCookieFirstVisit')]")
+    private WebElement acceptAllCookiesBtn;
 
     public MainPage(WebDriver driver, String xmUrl) {
         super(driver);
@@ -23,15 +20,8 @@ public class MainPage extends PageObject {
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement getUsernameField() {
-        return usernameField;
+    public WebElement getAcceptAllCookiesBtn() {
+        return acceptAllCookiesBtn;
     }
 
-    public WebElement getPasswordField() {
-        return passwordField;
-    }
-
-    public WebElement getLoginBtn() {
-        return loginBtn;
-    }
 }
