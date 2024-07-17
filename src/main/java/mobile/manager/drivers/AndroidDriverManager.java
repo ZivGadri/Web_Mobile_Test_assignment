@@ -63,9 +63,9 @@ public class AndroidDriverManager {
     }
 
     private static void setupDriverTimeouts () {
-        getDriver ().manage ()
-                .timeouts ()
-                .implicitlyWait (Duration.ofSeconds (5));
+        getDriver().manage()
+                .timeouts()
+                .implicitlyWait(Duration.ofSeconds(5));
     }
 
     //    private static DesiredCapabilities setCapabilities() {
