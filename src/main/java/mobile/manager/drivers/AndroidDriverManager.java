@@ -15,38 +15,38 @@ import static mobile.manager.server.AppiumServerManager.*;
 
 public class AndroidDriverManager {
     private static final String APP_PATH = String.valueOf(Path.of(System.getProperty("user.dir"), "src/main/resources/app", "yummly-8-7.apk"));
-    private static final ThreadLocal<AndroidDriver> DRIVER = new ThreadLocal<>();
-    private static final Logger LOG = LogManager.getLogger(AndroidDriverManager.class);
+    private static final ThreadLocal<AndroidDriver> ANDROID_DRIVER = new ThreadLocal<>();
+    private static final Logger LOGGER = LogManager.getLogger(AndroidDriverManager.class);
 
     public static void createAndroidDriver () {
         startServer("android");
         try {
-            setDriver(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),uiAutomator2OptionsWdio()));
+            setAndroidDriver(new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),uiAutomator2OptionsWdio()));
         } catch (final MalformedURLException e) {
             throw new RuntimeException (e);
         }
         setupDriverTimeouts();
     }
 
-    public static AndroidDriver getDriver() {
-        return AndroidDriverManager.DRIVER.get ();
+    public static AndroidDriver getAndroidDriver() {
+        return AndroidDriverManager.ANDROID_DRIVER.get ();
     }
 
     public static void quitSession() {
-        if (null != DRIVER.get ()) {
-            LOG.info ("Closing the driver...");
-            getDriver().quit();
-            DRIVER.remove();
+        if (null != ANDROID_DRIVER.get ()) {
+            LOGGER.info ("Closing the driver...");
+            getAndroidDriver().quit();
+            ANDROID_DRIVER.remove();
             stopServer();
         }
     }
 
-    private static void setDriver (final AndroidDriver driver) {
-        AndroidDriverManager.DRIVER.set(driver);
+    private static void setAndroidDriver(final AndroidDriver androidDriver) {
+        AndroidDriverManager.ANDROID_DRIVER.set(androidDriver);
     }
 
     private static void setupDriverTimeouts () {
-        getDriver().manage()
+        getAndroidDriver().manage()
                 .timeouts()
                 .implicitlyWait(Duration.ofSeconds(5));
     }
