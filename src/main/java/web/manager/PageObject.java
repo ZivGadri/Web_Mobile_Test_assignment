@@ -15,11 +15,15 @@ public class PageObject {
     private static final Duration DEFAULT_EXPLICIT_WAIT = Duration.ofSeconds(10);
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected Dimension screenSize;
 
-    public PageObject() {}
+    public PageObject() {
+        waitForPageLoad();
+    }
 
-    public PageObject(WebDriver driver) {
+    public PageObject(WebDriver driver, Dimension screenSize) {
         this.driver = driver;
+        this.screenSize = screenSize;
         wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT);
         waitForPageLoad();
     }
