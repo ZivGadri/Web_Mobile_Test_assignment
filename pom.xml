@@ -12,12 +12,12 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <appium-java-client-version>9.1.0</appium-java-client-version>
+        <appium-java-client-version>9.2.1</appium-java-client-version>
         <log4jcore.version>2.23.0</log4jcore.version>
         <log4japi.version>2.23.0</log4japi.version>
         <log4jimpl.version>2.23.0</log4jimpl.version>
         <testng.version>7.9.0</testng.version>
-        <selenium.version>4.22.0</selenium.version>
+        <selenium.version>4.9.1</selenium.version>
         <wdm.version>5.9.1</wdm.version>
         <maven.compiler.version>3.12.1</maven.compiler.version>
         <java.release.version>17</java.release.version>
