@@ -2,11 +2,11 @@ package web;
 
 import org.testng.annotations.Test;
 
-public class WebTests extends TestFlows {
+public class WebTestsWeb extends WebTestFlow {
 
-    public WebTests() {}
+    public WebTestsWeb() {}
 
-    public WebTests(int width, int height) {
+    public WebTestsWeb(int width, int height) {
         this.width = width;
         this.height = height;
     }
