@@ -19,7 +19,7 @@ public class BaseTests {
     protected int height;
     @BeforeClass
     public void beforeClass() {
-        logger.info("Starting before class initializations...");
+        LOGGER.info("Starting before class initializations...");
         webDriverFactory = new WebDriverFactory(BrowserTypes.CHROME.getBrowserType());
     }
 

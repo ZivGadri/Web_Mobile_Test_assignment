@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class PageObject {
-    private static final Logger logger = LogManager.getLogger(PageObject.class);
+    private static final Logger LOGGER = LogManager.getLogger(PageObject.class);
     private static final Duration DEFAULT_EXPLICIT_WAIT = Duration.ofSeconds(10);
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -33,13 +33,13 @@ public class PageObject {
     }
 
     public void navigateToUrl(String url) {
-        logger.info("navigating to url: {}", url);
+        LOGGER.info("navigating to url: {}", url);
         driver.get(url);
         waitForPageLoad();
     }
 
     public void waitForPageLoad() {
-        logger.info("Waiting for page to load...");
+        LOGGER.info("Waiting for page to load...");
         wait.until((ExpectedCondition<Boolean>) driver -> {
             JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
             return jsExecutor.executeScript("return document.readyState").equals("complete");
@@ -48,17 +48,17 @@ public class PageObject {
 
     public void clickButton(WebElement element, String buttonTitle) {
         try {
-            logger.info("Clicking on {} button", buttonTitle);
+            LOGGER.info("Clicking on {} button", buttonTitle);
             clickButtonByWebElement(element, Duration.ofSeconds(5));
             threadSleepLog(2, "after clicking button " + buttonTitle);
         } catch (NoSuchElementException nsee) {
-            logger.error("Failed to click on " + buttonTitle + " button.\nMore info: " + nsee.getMessage());
+            LOGGER.error("Failed to click on " + buttonTitle + " button.\nMore info: " + nsee.getMessage());
             throw new NoSuchElementException("Failed to click on " + buttonTitle + " button");
         } catch (TimeoutException te) {
-            logger.error("Wait interrupted.\nMore info: " + te.getMessage());
+            LOGGER.error("Wait interrupted.\nMore info: " + te.getMessage());
             throw new NoSuchElementException("Wait interrupted");
         } catch (Exception e) {
-            logger.error("Failed to click on " + buttonTitle + " button.\nMore info: " + e.getMessage());
+            LOGGER.error("Failed to click on " + buttonTitle + " button.\nMore info: " + e.getMessage());
             throw new RuntimeException("Failed to click on " + buttonTitle + " button");
         }
     }
@@ -74,7 +74,7 @@ public class PageObject {
     }
 
     public void sendText(WebElement element, String textToSend) {
-        logger.info("Inserting text to text field");
+        LOGGER.info("Inserting text to text field");
         clearTextField(element);
         element.sendKeys(textToSend);
         threadSleepLog(1, String.format("after text '%s' inserted to text box.", textToSend));
@@ -102,7 +102,7 @@ public class PageObject {
         try {
             return ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true)", element);
         } catch (Exception e) {
-            logger.debug("Unable to scroll into element view: " + element, e);
+            LOGGER.debug("Unable to scroll into element view: " + element, e);
         }
         return null;
     }
@@ -113,7 +113,7 @@ public class PageObject {
     }
 
     public static void threadSleepLog(long sec, String extraDetails) {
-        logger.info("Thread is sleeping for {} second(s) {}", sec, extraDetails);
+        LOGGER.info("Thread is sleeping for {} second(s) {}", sec, extraDetails);
         try {
             Thread.sleep(sec * 1000);
         } catch (InterruptedException ie) {
@@ -126,7 +126,7 @@ public class PageObject {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;
         } catch (NoSuchElementException | TimeoutException nsee) {
-            logger.info("Element was not found in page");
+            LOGGER.info("Element was not found in page");
             return false;
         }
     }
@@ -136,7 +136,7 @@ public class PageObject {
         try {
             elementToReturn = parent.findElement(findChildBy);
         } catch (NoSuchElementException nsee) {
-            logger.error("Could not find the child element by the WebElement and provided search info.");
+            LOGGER.error("Could not find the child element by the WebElement and provided search info.");
             throw new NoSuchElementException("Could not find the child element by the WebElement and provided search info.");
         }
         return elementToReturn;

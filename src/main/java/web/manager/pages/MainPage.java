@@ -11,7 +11,7 @@ import web.manager.PageObject;
 
 public class MainPage extends PageObject {
 
-    private static final Logger logger = LogManager.getLogger(MainPage.class);
+    private static final Logger LOGGER = LogManager.getLogger(MainPage.class);
 
     @FindBy(xpath = "//button[contains(@class,'acceptDefaultCookieFirstVisit')]")
     private WebElement acceptAllCookiesBtn;

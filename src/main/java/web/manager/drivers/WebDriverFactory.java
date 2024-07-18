@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class WebDriverFactory {
 
-    private static final Logger logger = LogManager.getLogger(WebDriverFactory.class);
+    private static final Logger LOGGER = LogManager.getLogger(WebDriverFactory.class);
     private final String BROWSER_TYPE;
     private WebDriver webDriver;
 
@@ -32,7 +32,7 @@ public class WebDriverFactory {
             webDriver = createLocalDriver(dimension);
             return webDriver;
         } catch (Exception e) {
-            logger.info("Web driver initialization process failed.");
+            LOGGER.info("Web driver initialization process failed.");
             throw new WebDriverException();
         }
     }
