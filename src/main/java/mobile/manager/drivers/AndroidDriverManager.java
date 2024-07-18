@@ -17,6 +17,10 @@ public class AndroidDriverManager {
     private static final ThreadLocal<AndroidDriver> ANDROID_DRIVER = new ThreadLocal<>();
     private static final Logger LOGGER = LogManager.getLogger(AndroidDriverManager.class);
 
+    public static AndroidDriver getDriver() {
+        return ANDROID_DRIVER.get();
+    }
+
     public static AndroidDriver createMobileDriver(String mobilePlatform) {
         startServer(mobilePlatform);
         if (mobilePlatform.equals(Constants.ANDROID_PLATFORM)) {
@@ -77,7 +81,8 @@ public class AndroidDriverManager {
         uiAutomator2Options = new UiAutomator2Options()
                 .setAvd(Constants.AVD_NAME)
                 .setAvdLaunchTimeout(Duration.ofSeconds(300))
-                .setAvdReadyTimeout(Duration.ofSeconds(100))
+                .setAvdReadyTimeout(Duration.ofSeconds(60))
+                .setAndroidInstallTimeout(Duration.ofSeconds(120))
                 .setDeviceName(Constants.DEVICE_NAME)
                 .setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2)
                 .setApp(Constants.APK_APP_PATH)

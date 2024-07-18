@@ -52,8 +52,8 @@ public class MobileUiManager {
     }
 
     public void selectLastIngredientPlusButton() {
-        WebElement lastIngredient = mobileUiHelper.getLastIngredientPlusButton(ElementsLocators.ingredientsList);
-        mobileUiHelper.clickButtonIfExists(lastIngredient,
+        WebElement lastIngredientPlusButton = mobileUiHelper.getLastIngredientPlusButton(ElementsLocators.ingredientsPlusButtonsList);
+        mobileUiHelper.clickButtonIfExists(lastIngredientPlusButton,
                 "Ingredients", true);
     }
 

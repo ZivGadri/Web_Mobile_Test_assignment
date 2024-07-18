@@ -11,7 +11,9 @@ public class Constants {
     public static final String SERVER_IP_ADDRESS = "127.0.0.1";
     public static final String BASE_PATH = "/wd/hub";
     public static final String DRIVER_NAME = "uiautomator2";
-    public static final String AVD_NAME = "Pixel_4_API_35";
+    //public static final String AVD_NAME = "Pixel_6_Pro_API_35";
+    public static final String AVD_NAME = "Pixel_8_Pro_API_35";
+    //public static final String AVD_NAME = "Pixel_4_API_35";
     public static final String DEVICE_NAME = "emulator-5554";
     public static final String APK_APP_PATH = String.valueOf(Path.of(System.getProperty("user.dir"), "src/test/resources/app", "yummly-8-7.apk"));
     public static final String IPA_APP_PATH = ""; // Not set
