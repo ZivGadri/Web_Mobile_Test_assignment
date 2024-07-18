@@ -13,9 +13,9 @@ public class ResolutionFactory {
         int maxHeight = (int) screenSize.getHeight();
 
         Object[] result = new Object[] {
-                new WebTests(maxWidth, maxHeight),
-                new WebTests(1024, 768),
-                new WebTests(800, 600)
+                new WebTestsWeb(maxWidth, maxHeight),
+                new WebTestsWeb(1024, 768),
+                new WebTestsWeb(800, 600)
         };
 
         return result;
