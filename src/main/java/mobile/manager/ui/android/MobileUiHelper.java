@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class MobileUiHelper {
@@ -43,6 +44,7 @@ public class MobileUiHelper {
     protected void clickButtonIfExists(WebElement element, String elementTitle, boolean failTestIfNotFound) {
         if (androidDriver != null) {
             try {
+                checkForThePresenceOfPopupAndRemove();
                 wait.until(ExpectedConditions.elementToBeClickable(element)).click();
                 LOGGER.info("Clicked on: '{}'", elementTitle);
                 threadSleep(3);
@@ -84,11 +86,37 @@ public class MobileUiHelper {
         }
     }
 
+    private boolean isElementPresent(By by) {
+        try {
+            androidDriver.findElement(by);
+            return true;
+        } catch (NoSuchElementException nse) {
+            return false;
+        }
+    }
+
+    private void checkForThePresenceOfPopupAndRemove() {
+        By by = ElementsLocators.noThanksBtn;
+        WebDriverWait popupWait = new WebDriverWait(androidDriver, Duration.ofSeconds(5));
+        try {
+            popupWait.until(ExpectedConditions.elementToBeClickable(by)).click();
+            threadSleep(5, "right after ");
+        } catch (NoSuchElementException nse) {
+            LOGGER.info("No popup detected");
+        }
+
+    }
+
     private void threadSleep(int seconds) {
         try {
             Thread.sleep(seconds * 1000L);
-            LOGGER.info("Thread has paused for {} seconds", seconds);
+            LOGGER.info("Thread has paused for {} seconds\n", seconds);
         } catch (InterruptedException ie) {
         }
+    }
+
+    private void threadSleep(int seconds, String message) {
+        threadSleep(seconds);
+        LOGGER.info(message);
     }
 }

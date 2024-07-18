@@ -8,7 +8,7 @@ public class MobilePlatformFactory {
     public Object[] SetupMobilePlatforms() {
 
         Object[] result = new Object[] {
-                new MobileTests(Constants.ANDROID_PLATFORM)
+                new MobileTest(Constants.ANDROID_PLATFORM)
                 //,new MobileTests(Constants.IOS_PLATFORM)  *** Not yet implemented
         };
 

@@ -2,7 +2,7 @@ package mobile;
 
 import mobile.manager.Constants;
 
-public class MobileTestFlow extends MobileBaseTests {
+public class TestFlowMobile extends BaseTestsMobile {
 
     protected void testYummlyApp() {
         mobileUiManager.clickAskMeLaterBtn();

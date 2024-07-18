@@ -2,9 +2,11 @@ package mobile;
 
 import org.testng.annotations.Test;
 
-public class MobileTests extends MobileTestFlow {
-    public MobileTests() {}
-    public MobileTests(String mobilePlatform) {
+public class MobileTest extends TestFlowMobile {
+
+    public MobileTest() {}
+
+    public MobileTest(String mobilePlatform) {
         this.mobilePlatform = mobilePlatform;
     }
     @Test

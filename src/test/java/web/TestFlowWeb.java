@@ -1,6 +1,6 @@
 package web;
 
-public class WebTestFlow extends WebBaseTests {
+public class TestFlowWeb extends BaseTestsWeb {
     protected void orkalaAsaData() {
         webUiManager.navigateToMainPage();
     }

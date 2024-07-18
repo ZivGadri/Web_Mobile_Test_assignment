@@ -10,8 +10,8 @@ import web.manager.drivers.WebDriverFactory;
 import web.manager.models.BrowserTypes;
 
 
-public class WebBaseTests {
-    private static final Logger LOGGER = LogManager.getLogger(WebBaseTests.class);
+public class BaseTestsWeb {
+    private static final Logger LOGGER = LogManager.getLogger(BaseTestsWeb.class);
     private static WebDriverFactory webDriverFactory;
     protected WebUiManager webUiManager;
     private WebDriver driver;

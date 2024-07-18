@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeClass;
 
 import static mobile.manager.drivers.AndroidDriverManager.quitSession;
 
-public class MobileBaseTests {
+public class BaseTestsMobile {
     protected String mobilePlatform;
     protected MobileUiManager mobileUiManager;
 
