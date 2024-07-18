@@ -3,7 +3,7 @@
 <suite name="Mobile-Test-Suite">
     <test name="Mobile-Yummly">
         <classes>
-            <class name="mobile.AndroidTests"/>
+            <class name="mobile.MobilePlatformFactory"/>
         </classes>
     </test>
 </suite>

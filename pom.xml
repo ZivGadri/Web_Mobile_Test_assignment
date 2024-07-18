@@ -12,7 +12,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <appium-java-client-version>9.2.1</appium-java-client-version>
+        <appium-java-client-version>9.2.3</appium-java-client-version>
         <log4jcore.version>2.23.0</log4jcore.version>
         <log4japi.version>2.23.0</log4japi.version>
         <log4jimpl.version>2.23.0</log4jimpl.version>

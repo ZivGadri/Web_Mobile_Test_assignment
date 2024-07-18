@@ -6,14 +6,14 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import web.manager.pageHelpers.MainPageHelper;
 
-public class UiManager {
-    private static final Logger logger = LogManager.getLogger(UiManager.class);
+public class WebUiManager {
+    private static final Logger LOGGER = LogManager.getLogger(WebUiManager.class);
     private Dimension screenSize;
     private final WebDriver driver;
     private MainPageHelper mainPageHelper;
     private final String xmUrl = "https://www.xm.com";
 
-    public UiManager(WebDriver driver) {
+    public WebUiManager(WebDriver driver) {
         this.driver = driver;
         this.screenSize = driver.manage().window().getSize();
     }
