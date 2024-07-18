@@ -5,15 +5,15 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import web.manager.UiManager;
+import web.manager.WebUiManager;
 import web.manager.drivers.WebDriverFactory;
 import web.manager.models.BrowserTypes;
 
 
-public class BaseTests {
-    private static final Logger logger = LogManager.getLogger(BaseTests.class);
+public class WebBaseTests {
+    private static final Logger LOGGER = LogManager.getLogger(WebBaseTests.class);
     private static WebDriverFactory webDriverFactory;
-    protected UiManager uiManager;
+    protected WebUiManager webUiManager;
     private WebDriver driver;
     protected int width;
     protected int height;
@@ -28,7 +28,7 @@ public class BaseTests {
     public void beforeMethod() {
         Dimension dimension = new Dimension(width, height);
         driver = webDriverFactory.initWebDriver(dimension);
-        uiManager = new UiManager(driver);
+        webUiManager = new WebUiManager(driver);
     }
 
     @AfterMethod
