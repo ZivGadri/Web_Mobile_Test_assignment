@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.time.Duration;
 
 import static mobile.manager.server.AppiumServerManager.*;
@@ -18,8 +17,17 @@ public class AndroidDriverManager {
     private static final ThreadLocal<AndroidDriver> ANDROID_DRIVER = new ThreadLocal<>();
     private static final Logger LOGGER = LogManager.getLogger(AndroidDriverManager.class);
 
-    public static void createAndroidDriver () {
-        startServer(Constants.MOBILE_PLATFORM);
+    public static AndroidDriver createMobileDriver(String mobilePlatform) {
+        startServer(mobilePlatform);
+        if (mobilePlatform.equals(Constants.ANDROID_PLATFORM)) {
+            createAndroidDriver();
+        } else {
+            // createIosDriver(); // create ios driver - Not yet implemented
+        }
+        return ANDROID_DRIVER.get();
+    }
+
+    public static void createAndroidDriver() {
         try {
             setAndroidDriver(new AndroidDriver(new URL(Constants.APPIUM_SERVER_URL), uiAutomator2Options()));
         } catch (final MalformedURLException e) {
@@ -28,13 +36,22 @@ public class AndroidDriverManager {
         setupDriverTimeouts();
     }
 
+    /*public static void createIosDriver() {
+        try {
+            setIosDriver(new IOSDriver(new URL(Constants.APPIUM_SERVER_URL), xcuiTestOptions()));
+        } catch (final MalformedURLException e) {
+            throw new RuntimeException (e);
+        }
+        setupDriverTimeouts();
+    }*/
+
     public static AndroidDriver getAndroidDriver() {
-        return AndroidDriverManager.ANDROID_DRIVER.get ();
+        return (AndroidDriver) ANDROID_DRIVER.get();
     }
 
     public static void quitSession() {
-        if (null != ANDROID_DRIVER.get ()) {
-            LOGGER.info ("Closing the driver...");
+        if (ANDROID_DRIVER.get() != null) {
+            LOGGER.info("Closing the driver...");
             getAndroidDriver().quit();
             ANDROID_DRIVER.remove();
             stopServer();
@@ -42,13 +59,17 @@ public class AndroidDriverManager {
     }
 
     private static void setAndroidDriver(final AndroidDriver androidDriver) {
-        AndroidDriverManager.ANDROID_DRIVER.set(androidDriver);
+        ANDROID_DRIVER.set(androidDriver);
     }
 
-    private static void setupDriverTimeouts () {
-        getAndroidDriver().manage()
+    /*private static void setIosDriver(final IOSDriver iosDriver) {
+        ANDROID_DRIVER.set(iosDriver);
+    }*/
+
+    private static void setupDriverTimeouts() {
+        ANDROID_DRIVER.get().manage()
                 .timeouts()
-                .implicitlyWait(Duration.ofSeconds(5));
+                .implicitlyWait(Constants.IMPLICIT_WAIT);
     }
 
     private static UiAutomator2Options uiAutomator2Options() {
@@ -59,11 +80,22 @@ public class AndroidDriverManager {
                 .setAvdReadyTimeout(Duration.ofSeconds(100))
                 .setDeviceName(Constants.DEVICE_NAME)
                 .setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2)
-                .setApp(Constants.APP_PATH)
+                .setApp(Constants.APK_APP_PATH)
                 .setNewCommandTimeout(Duration.ofSeconds(300))
                 .setAppPackage(Constants.APP_PACKAGE)
                 .setAppActivity(Constants.APP_ACTIVITY)
                 .setNoReset(false);
         return uiAutomator2Options;
     }
+
+    /*private static XCUITestOptions xcuiTestOptions() {
+        return new XCUITestOptions()
+                .setDeviceName("iPhone 14 Pro Max")
+                .setAutomationName(AutomationName.IOS_XCUI_TEST)
+                .setNewCommandTimeout(Duration.ofSeconds(300))
+                .setPlatformVersion("16.2")
+                .setUdid(Constants.UDID)
+                .setApp(Constants.APK_APP_PATH)
+                .setNoReset(false);
+    }*/
 }
