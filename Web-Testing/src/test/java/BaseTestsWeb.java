@@ -1,3 +1,4 @@
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.asserts.SoftAssert;
 import ui.manager.drivers.WebDriverFactory;
 import ui.manager.models.BrowserTypes;
@@ -29,6 +30,7 @@ public class BaseTestsWeb {
     @BeforeMethod
     @Parameters()
     public void beforeMethod() {
+        LOGGER.info("Starting test with screen resolution: {} X {}", width, height);
         Dimension dimension = new Dimension(width, height);
         driver = webDriverFactory.initWebDriver(dimension);
         webUiManager = new WebUiManager(driver);
