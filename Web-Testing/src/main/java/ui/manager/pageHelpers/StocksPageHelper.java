@@ -61,6 +61,16 @@ public class StocksPageHelper extends StocksPage {
         new StocksPageHelper(driver);
     }
 
+    /**
+     * This Method clicks the 'Read More' button of the requested stock.
+     * ** It checks for the element's click-ability and makes attempts to click it
+     *    using webdriver command and javascript executor.
+     *
+     * @param symbolAndDescription  Requested stock
+     *
+     * @return A new instance of the ReadMorePageHelper to instantiate the elements
+     * @throws ElementNotInteractableException
+     */
     public ReadMorePageHelper clickReadMore(String symbolAndDescription) {
         List<WebElement> relevantRowColumns = getRelevantRowColumns(getRelevantRow(symbolAndDescription));
         WebElement readMoreColumn = relevantRowColumns.get(relevantRowColumns.size() - 1);

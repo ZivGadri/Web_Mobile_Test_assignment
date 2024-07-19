@@ -1,6 +1,3 @@
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -8,7 +5,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TestFlowWeb extends BaseTestsWeb {
-    private static final Logger LOGGER = LogManager.getLogger(TestFlowWeb.class);
     Set<Map.Entry<String, String>> differences;
 
     protected void orkalaAsaData() {
