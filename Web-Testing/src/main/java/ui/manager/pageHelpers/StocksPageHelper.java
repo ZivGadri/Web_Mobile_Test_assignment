@@ -1,13 +1,15 @@
 package ui.manager.pageHelpers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import ui.manager.pages.StocksPage;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class StocksPageHelper extends StocksPage {
+    private static final Logger LOGGER = LogManager.getLogger(StocksPageHelper.class);
     public StocksPageHelper(WebDriver driver) {
         super(driver);
     }
@@ -54,22 +56,19 @@ public class StocksPageHelper extends StocksPage {
     }
 
     private void clickNextPage() {
+        scrollIntoCenterView(getNextPageBtn());
         clickButton(getNextPageBtn(), "Next", false);
         new StocksPageHelper(driver);
     }
 
     public ReadMorePageHelper clickReadMore(String symbolAndDescription) {
-        Actions actions = new Actions(driver);
         List<WebElement> relevantRowColumns = getRelevantRowColumns(getRelevantRow(symbolAndDescription));
         WebElement readMoreColumn = relevantRowColumns.get(relevantRowColumns.size() - 1);
-        if (screenSize.width < 1030) {
-            try {
-                actions.moveToElement(readMoreColumn).click().perform();
-            } catch (Exception e) {
-                driver.get(readMoreColumn.findElement(By.xpath("./a")).getAttribute("href"));
-            }
-        } else {
+        try {
             clickButton(readMoreColumn, "Read More", false);
+        } catch (NoSuchElementException nsee) {
+            LOGGER.error("Element Read More button is not intractable");
+            throw new ElementNotInteractableException("Element Read More button is not intractable");
         }
         return new ReadMorePageHelper(driver);
     }

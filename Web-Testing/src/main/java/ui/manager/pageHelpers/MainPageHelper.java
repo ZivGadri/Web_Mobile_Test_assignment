@@ -1,5 +1,6 @@
 package ui.manager.pageHelpers;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,23 +20,17 @@ public class MainPageHelper extends MainPage {
 
     public StocksPageHelper navigateToStocksPage() {
         clickButtonIfPresent(getMainMenuHamburgerIcon(), "Menu", true,false);
-        if (screenSize.width < 1000) {
-            clickButton(getSmallResTradingMenuBtn(), "Trading",true);
-        } else {
-            clickButton(getMedResTradingMenuBtn(), "Trading", true);
-        }
+        clickButton(getTradingMenuBtn(), "Trading", false);
         clickButton(getStocksBtn(), "Stocks", true);
         return new StocksPageHelper(driver);
     }
 
     public boolean isOpenAnAccountBtnClickable() {
         try {
-            WebElement e = wait.until(ExpectedConditions.elementToBeClickable(getOpenAnAccountBtn()));
+            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(getOpenAnAccountBtn()));
             return true;
-        } catch (Exception e) {
+        } catch (TimeoutException toe) {
             return false;
         }
     }
-
-
 }

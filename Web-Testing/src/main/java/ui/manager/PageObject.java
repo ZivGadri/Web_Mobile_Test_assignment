@@ -21,7 +21,7 @@ public class PageObject {
     public PageObject(WebDriver driver) {
         this.driver = driver;
         this.screenSize = driver.manage().window().getSize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         waitForPageLoad();
     }
 
@@ -79,22 +79,28 @@ public class PageObject {
         }
     }
 
-    private Object scrollIntoCenterView(WebElement element) {
+    public void scrollIntoCenterView(WebElement element) {
         try {
-            return ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
         } catch (Exception e) {
             LOGGER.debug("Unable to scroll into element view: " + element, e);
         }
-        return null;
     }
 
-    public Object scrollIntoTopView(WebElement element) {
+    public void scrollIntoBottomView(WebElement element) {
         try {
-            return ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true)", element);
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView({block: 'end'});", element);
         } catch (Exception e) {
             LOGGER.debug("Unable to scroll into element view: " + element, e);
         }
-        return null;
+    }
+
+    public void scrollIntoTopView(WebElement element) {
+        try {
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true)", element);
+        } catch (Exception e) {
+            LOGGER.debug("Unable to scroll into element view: " + element, e);
+        }
     }
 
     public String getElementTextUsingJavaScript(WebElement element) {

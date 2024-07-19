@@ -22,7 +22,7 @@ public class MainPage extends PageObject {
     private WebElement smallResTradingMenuBtn;
 
     @FindBy(className = "main_nav_trading")
-    private WebElement medResTradingMenuBtn;
+    private WebElement medHighResTradingMenuBtn;
 
     @FindBy(linkText = "Stocks")
     private WebElement stocksBtn;
@@ -46,12 +46,20 @@ public class MainPage extends PageObject {
         return smallResTradingMenuBtn;
     }
 
-    public WebElement getStocksBtn() {
-        return stocksBtn;
+    public WebElement getMedHighResTradingMenuBtn() {
+        return medHighResTradingMenuBtn;
     }
 
-    public WebElement getMedResTradingMenuBtn() {
-        return medResTradingMenuBtn;
+    public WebElement getTradingMenuBtn() {
+        if (smallResTradingMenuBtn.isDisplayed()) {
+            return smallResTradingMenuBtn;
+        } else {
+            return medHighResTradingMenuBtn;
+        }
+    }
+
+    public WebElement getStocksBtn() {
+        return stocksBtn;
     }
     public WebElement getOpenAnAccountBtn() {
         return openAnAccountBtn;
