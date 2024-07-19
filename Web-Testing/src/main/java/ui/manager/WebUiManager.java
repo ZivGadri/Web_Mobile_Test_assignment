@@ -1,7 +1,5 @@
 package ui.manager;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import ui.manager.pageHelpers.MainPageHelper;
 import ui.manager.pageHelpers.ReadMorePageHelper;
@@ -10,7 +8,6 @@ import ui.manager.pageHelpers.StocksPageHelper;
 import java.util.HashMap;
 
 public class WebUiManager {
-    private static final Logger LOGGER = LogManager.getLogger(WebUiManager.class);
     private final WebDriver driver;
     private MainPageHelper mainPageHelper;
     private StocksPageHelper stocksPageHelper;
@@ -41,7 +38,7 @@ public class WebUiManager {
 
     public HashMap<String, String> getReadMoreTablesData() {
         clickReadMore("Orkla ASA (ORK.OL)");
-        return readMorePageHelper.getRowsElementsFromBothTables();
+        return readMorePageHelper.extractDataFromBothTables();
     }
 
     // Assertion Methods
