@@ -1,6 +1,7 @@
 package ui.manager;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.StopWatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
@@ -9,22 +10,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class PageObject {
     private static final Logger LOGGER = LogManager.getLogger(PageObject.class);
-    private static final long DEFAULT_EXPLICIT_WAIT = 10;
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected Dimension screenSize;
 
-    public PageObject() {
-        waitForPageLoad();
-    }
-
-    public PageObject(WebDriver driver, Dimension screenSize) {
+    public PageObject(WebDriver driver) {
         this.driver = driver;
-        this.screenSize = screenSize;
-        wait = new WebDriverWait(driver, DEFAULT_EXPLICIT_WAIT);
+        this.screenSize = driver.manage().window().getSize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         waitForPageLoad();
     }
 
@@ -46,10 +43,10 @@ public class PageObject {
         });
     }
 
-    public void clickButton(WebElement element, String buttonTitle) {
+    public void clickButton(WebElement element, String buttonTitle, boolean scrollIntoView) {
         try {
             LOGGER.info("Clicking on {} button", buttonTitle);
-            clickButtonByWebElement(element, 5);
+            clickButtonByWebElement(element, Duration.ofSeconds(5), scrollIntoView);
             threadSleepLog(2, "after clicking button " + buttonTitle);
         } catch (NoSuchElementException nsee) {
             LOGGER.error("Failed to click on " + buttonTitle + " button.\nMore info: " + nsee.getMessage());
@@ -63,9 +60,9 @@ public class PageObject {
         }
     }
 
-    public void clickButtonIfPresent(WebElement element, String buttonTitle, boolean failIfNotPresent) {
+    public void clickButtonIfPresent(WebElement element, String buttonTitle, boolean scrollIntoView, boolean failIfNotPresent) {
         if (isElementFoundInPage(element)) {
-            clickButton(element, buttonTitle);
+            clickButton(element, buttonTitle, scrollIntoView);
         } else {
             if (failIfNotPresent) {
                 throw new NoSuchElementException(String.format("The button %s could not be found.", buttonTitle));
@@ -73,24 +70,8 @@ public class PageObject {
         }
     }
 
-    public void sendText(WebElement element, String textToSend) {
-        LOGGER.info("Inserting text to text field");
-        clearTextField(element);
-        element.sendKeys(textToSend);
-        threadSleepLog(1, String.format("after text '%s' inserted to text box.", textToSend));
-    }
-
-    private void clearTextField(WebElement element) {
-        int textSize = element.getAttribute("value").length();
-        String backSpace = StringUtils.repeat("\b", textSize);
-
-        while (!element.getAttribute("value").isEmpty()) {
-            element.sendKeys(backSpace);
-        }
-    }
-
-    private void clickButtonByWebElement(WebElement element, long seconds) {
-        scrollIntoView(element);
+    private void clickButtonByWebElement(WebElement element, Duration seconds, boolean scrollIntoView) {
+        if (scrollIntoView) scrollIntoCenterView(element);
         try {
             waitForClickable(seconds, element).click();
         } catch (ElementNotInteractableException enie) {
@@ -98,7 +79,16 @@ public class PageObject {
         }
     }
 
-    private Object scrollIntoView(WebElement element) {
+    private Object scrollIntoCenterView(WebElement element) {
+        try {
+            return ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+        } catch (Exception e) {
+            LOGGER.debug("Unable to scroll into element view: " + element, e);
+        }
+        return null;
+    }
+
+    public Object scrollIntoTopView(WebElement element) {
         try {
             return ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true)", element);
         } catch (Exception e) {
@@ -107,7 +97,12 @@ public class PageObject {
         return null;
     }
 
-    private WebElement waitForClickable(long seconds, WebElement element) {
+    public String getElementTextUsingJavaScript(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return  (String) js.executeScript("return arguments[0].innerText;", element);
+    }
+
+    private WebElement waitForClickable(Duration seconds, WebElement element) {
         WebDriverWait wait = new WebDriverWait(getDriver(), seconds);
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
@@ -140,5 +135,13 @@ public class PageObject {
             throw new NoSuchElementException("Could not find the child element by the WebElement and provided search info.");
         }
         return elementToReturn;
+    }
+
+    public List<WebElement> getTableRows(WebElement tableElement) {
+        try {
+            return tableElement.findElements(By.xpath("./tbody/tr"));
+        } catch (NoSuchElementException nse) {
+            throw new NoSuchElementException("Could not find the table rows");
+        }
     }
 }
