@@ -2,7 +2,6 @@ package ui.manager.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,13 +19,19 @@ public class MainPage extends PageObject {
     private WebElement mainMenuHamburgerIcon;
 
     @FindBy(xpath = "//a[@aria-controls='tradingMenu']")
-    private WebElement tradingMenuBtn;
+    private WebElement smallResTradingMenuBtn;
+
+    @FindBy(className = "main_nav_trading")
+    private WebElement medResTradingMenuBtn;
 
     @FindBy(linkText = "Stocks")
     private WebElement stocksBtn;
 
-    public MainPage(WebDriver driver, String xmUrl, Dimension screenSize) {
-        super(driver, screenSize);
+    @FindBy(linkText = "Open an Account")
+    private WebElement openAnAccountBtn;
+
+    public MainPage(WebDriver driver, String xmUrl) {
+        super(driver);
         navigateToUrl(xmUrl);
         PageFactory.initElements(driver, this);
     }
@@ -37,11 +42,18 @@ public class MainPage extends PageObject {
 
     public WebElement getMainMenuHamburgerIcon() { return mainMenuHamburgerIcon; }
 
-    public WebElement getTradingMenuBtn() {
-        return tradingMenuBtn;
+    public WebElement getSmallResTradingMenuBtn() {
+        return smallResTradingMenuBtn;
     }
 
     public WebElement getStocksBtn() {
         return stocksBtn;
+    }
+
+    public WebElement getMedResTradingMenuBtn() {
+        return medResTradingMenuBtn;
+    }
+    public WebElement getOpenAnAccountBtn() {
+        return openAnAccountBtn;
     }
 }

@@ -1,3 +1,4 @@
+import org.testng.asserts.SoftAssert;
 import ui.manager.drivers.WebDriverFactory;
 import ui.manager.models.BrowserTypes;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +16,8 @@ public class BaseTestsWeb {
     private static final Logger LOGGER = LogManager.getLogger(BaseTestsWeb.class);
     private static WebDriverFactory webDriverFactory;
     protected WebUiManager webUiManager;
-    private WebDriver driver;
+    protected WebDriver driver;
+    protected SoftAssert softAssert;
     protected int width;
     protected int height;
     @BeforeClass
@@ -30,6 +32,7 @@ public class BaseTestsWeb {
         Dimension dimension = new Dimension(width, height);
         driver = webDriverFactory.initWebDriver(dimension);
         webUiManager = new WebUiManager(driver);
+        softAssert = new SoftAssert();
     }
 
     @AfterMethod
