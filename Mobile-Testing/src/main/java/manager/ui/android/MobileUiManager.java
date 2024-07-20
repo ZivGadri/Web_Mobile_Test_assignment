@@ -4,14 +4,14 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import org.openqa.selenium.WebElement;
 
-import static manager.drivers.AndroidDriverManager.createMobileDriver;
+import static manager.drivers.AndroidDriverManager.createAndroidDriver;
 
 public class MobileUiManager {
     private AndroidDriver androidDriver;
     private MobileUiHelper mobileUiHelper;
 
-    public MobileUiManager(String mobilePlatformName) {
-        this.androidDriver = createMobileDriver(mobilePlatformName);
+    public MobileUiManager() {
+        this.androidDriver = createAndroidDriver();
         mobileUiHelper = new MobileUiHelper(androidDriver);
     }
 
@@ -65,5 +65,4 @@ public class MobileUiManager {
     public void closePopup() {
         mobileUiHelper.clickAndroidKey(AndroidKey.BACK);
     }
-
 }

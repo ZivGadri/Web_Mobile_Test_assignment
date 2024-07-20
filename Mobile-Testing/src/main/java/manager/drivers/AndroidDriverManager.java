@@ -21,33 +21,16 @@ public class AndroidDriverManager {
         return ANDROID_DRIVER.get();
     }
 
-    public static AndroidDriver createMobileDriver(String mobilePlatform) {
-        startServer(mobilePlatform);
-        if (mobilePlatform.equals(Constants.ANDROID_PLATFORM)) {
-            createAndroidDriver();
-        } else {
-            // createIosDriver(); // create ios driver - Not yet implemented
-        }
-        return ANDROID_DRIVER.get();
-    }
-
-    public static void createAndroidDriver() {
+    public static AndroidDriver createAndroidDriver() {
+        startServer(Constants.ANDROID_PLATFORM);
         try {
             setAndroidDriver(new AndroidDriver(new URL(Constants.APPIUM_SERVER_URL), uiAutomator2Options()));
         } catch (final MalformedURLException e) {
             throw new RuntimeException (e);
         }
         setupDriverTimeouts();
+        return ANDROID_DRIVER.get();
     }
-
-    /*public static void createIosDriver() {
-        try {
-            setIosDriver(new IOSDriver(new URL(Constants.APPIUM_SERVER_URL), xcuiTestOptions()));
-        } catch (final MalformedURLException e) {
-            throw new RuntimeException (e);
-        }
-        setupDriverTimeouts();
-    }*/
 
     public static AndroidDriver getAndroidDriver() {
         return (AndroidDriver) ANDROID_DRIVER.get();
@@ -65,10 +48,6 @@ public class AndroidDriverManager {
     private static void setAndroidDriver(final AndroidDriver androidDriver) {
         ANDROID_DRIVER.set(androidDriver);
     }
-
-    /*private static void setIosDriver(final IOSDriver iosDriver) {
-        ANDROID_DRIVER.set(iosDriver);
-    }*/
 
     private static void setupDriverTimeouts() {
         ANDROID_DRIVER.get().manage()
@@ -92,15 +71,4 @@ public class AndroidDriverManager {
                 .setNoReset(false);
         return uiAutomator2Options;
     }
-
-    /*private static XCUITestOptions xcuiTestOptions() {
-        return new XCUITestOptions()
-                .setDeviceName("iPhone 14 Pro Max")
-                .setAutomationName(AutomationName.IOS_XCUI_TEST)
-                .setNewCommandTimeout(Duration.ofSeconds(300))
-                .setPlatformVersion("16.2")
-                .setUdid(Constants.UDID)
-                .setApp(Constants.APK_APP_PATH)
-                .setNoReset(false);
-    }*/
 }
