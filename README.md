@@ -49,8 +49,8 @@ The actual test runs the flow provided with two exceptions
 * *DEVICE_NAME*
 * *AVD_NAME*
 
-Copy the Yummly .apk file to the location: _Mobile-Testing/src/test/resources/app/_
-Run the TestNG xml file: _src/test/test-suite/MobileTests.xml_ that's in the *Mobile-Testing* module
+3. Copy the Yummly .apk file to the location: _Mobile-Testing/src/test/resources/app/_\
+4. Run the TestNG xml file: _Mobile-Testing/src/test/test-suite/MobileTests.xml_
 
 ***
 ### Web project
@@ -70,9 +70,8 @@ The test runs three times using different resolution for each test run.
 Different dummy assertions are made along the way.
 
 ### Running the project
-Setup your desired browser type in the *BaseTestsWeb.beforeClass#_WebDriverFactory(String browserType)_*
-
-Run the TestNG xml file: _src/test/test-suite/WebTests.xml_ that's in the *Web-Testing* module
+1. Setup your desired browser type in the *BaseTestsWeb.beforeClass#_WebDriverFactory(String browserType)_*
+2. Run the TestNG xml file: _Web-Testing/src/test/test-suite/WebTests.xml_
 
 ***
 
@@ -82,7 +81,7 @@ This will download the '.xapk' file. You'll need to extract it first.\
 Then pull the 'com.yummly.android.apk' file from the extracted folder 
 and place it in the path _'src/test/resources/app/'_
 
-* Java 17 download [link](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)\
+* Java 17 download [link](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 * Android Studio download [link](https://developer.android.com/studio)
 
 GOOD LUCK TO ALL 😊 
