@@ -17,17 +17,16 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.version>3.12.1</maven.compiler.version>
+        <java.release.version>17</java.release.version>
+        <maven.surefire.version>3.2.5</maven.surefire.version>
+        <maven.source.encoding>UTF-8</maven.source.encoding>
         <appium-java-client-version>9.2.3</appium-java-client-version>
         <log4jcore.version>2.23.0</log4jcore.version>
         <log4japi.version>2.23.0</log4japi.version>
         <log4jimpl.version>2.23.0</log4jimpl.version>
         <testng.version>7.9.0</testng.version>
-        <selenium.version>4.9.1</selenium.version>
-        <wdm.version>5.9.1</wdm.version>
-        <maven.compiler.version>3.12.1</maven.compiler.version>
-        <java.release.version>17</java.release.version>
-        <maven.surefire.version>3.2.5</maven.surefire.version>
-        <maven.source.encoding>UTF-8</maven.source.encoding>
+        <selenium.version>4.22.0</selenium.version>
         <suite-xml>test-suite/testng.xml</suite-xml>
     </properties>
 
@@ -47,11 +46,6 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${wdm.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

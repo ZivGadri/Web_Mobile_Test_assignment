@@ -11,7 +11,7 @@ public class MobileTest extends TestFlowMobile {
     }
     @Test
     public void androidTest() {
-        LOGGER.info("Starting Yummly app test flow");
+        LOGGER.info("Starting Yummly app test flow over {} device", mobilePlatform);
         testYummlyApp();
     }
 

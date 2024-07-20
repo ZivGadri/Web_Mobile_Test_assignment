@@ -1,3 +1,4 @@
+import manager.Constants;
 
 public class TestFlowMobile extends BaseTestsMobile {
 
