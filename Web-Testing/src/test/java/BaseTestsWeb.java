@@ -1,4 +1,3 @@
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.asserts.SoftAssert;
 import ui.manager.drivers.WebDriverFactory;
 import ui.manager.models.BrowserTypes;

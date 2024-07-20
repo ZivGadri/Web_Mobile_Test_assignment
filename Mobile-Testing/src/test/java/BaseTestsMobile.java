@@ -1,4 +1,3 @@
-import manager.Constants;
 import manager.ui.android.MobileUiManager;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +13,7 @@ public class BaseTestsMobile {
 
     @BeforeClass(alwaysRun = true)
     public void testSetup() {
-        mobileUiManager = new MobileUiManager(Constants.ANDROID_PLATFORM);
+        mobileUiManager = new MobileUiManager();
     }
 
     @BeforeMethod
