@@ -2,7 +2,7 @@
 #### Testing project assignment on mobile and web platforms
 The project consists of two modules - Web-Testing and Mobile-Testing\
 Each module has its own TestNG xml file for running.\
-The files found in _src/test/test-suite/_ respectively to each module.\
+The files found in _src/test/test-suite/_ respectively to each module.
 
 ### Mobile project
 
